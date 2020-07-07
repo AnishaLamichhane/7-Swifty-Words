@@ -152,7 +152,7 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             
-                if score % 7 == 0 {
+                if score == 7 {
                     let ac = UIAlertController(title: "Well Done", message: "Are you ready fot the next level.", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Let's go", style: .default, handler: levelUp))
                     present(ac, animated: true)
