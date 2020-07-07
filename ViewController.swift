@@ -74,6 +74,8 @@ class ViewController: UIViewController {
         
         let buttonView = UIView()
         buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.layer.borderWidth = 1
+        buttonView.layer.borderColor = UIColor.lightGray.cgColor
         view.addSubview(buttonView)
         
         NSLayoutConstraint.activate([
@@ -152,12 +154,19 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             
-                if score % 7 == 0 {
+                if score == 7{
                     let ac = UIAlertController(title: "Well Done", message: "Are you ready fot the next level.", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Let's go", style: .default, handler: levelUp))
                     present(ac, animated: true)
             }
         }
+        else {
+            score -= 1
+            let ac = UIAlertController(title: "Wrong!", message: "Oops! The answer is incorrect.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Close", style: .cancel))
+            present(ac, animated: true)
+            }
+        
     }
     func levelUp(action : UIAlertAction){
         level += 1
