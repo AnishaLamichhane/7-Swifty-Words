@@ -1,2 +1,3 @@
-# 7-Swifty-Words
+# 7-Swifty-Words #A-Word-Puzzle-Game #Challenge 8 #hackingWithSwift
+
 Challenge One of the best ways to learn is to write your own code as often as possible, so here are three ways you should try extending this app to make sure you fully understand what’s going on:  Use the techniques you learned in project 2 to draw a thin gray line around the buttons view, to make it stand out from the rest of the UI. If the user enters an incorrect guess, show an alert telling them they are wrong. You’ll need to extend the submitTapped() method so that if firstIndex(of:) failed to find the guess you show the alert. Try making the game also deduct points if the player makes an incorrect guess. Think about how you can move to the next level – we can’t use a simple division remainder on the player’s score any more, because they might have lost some points.
