@@ -23,6 +23,12 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    
+    var hiddenButton = 0{
+        didSet {
+            print(hiddenButton)
+        }
+    }
     var level = 1
     
     override func loadView() {
@@ -74,6 +80,8 @@ class ViewController: UIViewController {
         
         let buttonView = UIView()
         buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.layer.borderWidth = 1
+        buttonView.layer.borderColor = UIColor.lightGray.cgColor
         view.addSubview(buttonView)
         
         NSLayoutConstraint.activate([
@@ -138,6 +146,7 @@ class ViewController: UIViewController {
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
         sender.isHidden = true
+        hiddenButton += 1
     }
     
     @objc func submitTapped(_ sender: UIButton) {
@@ -152,15 +161,23 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             
-                if score % 7 == 0 {
+                if hiddenButton == 20{
                     let ac = UIAlertController(title: "Well Done", message: "Are you ready fot the next level.", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "Let's go", style: .default, handler: levelUp))
                     present(ac, animated: true)
             }
         }
+        else {
+            score -= 1
+            let ac = UIAlertController(title: "Wrong!", message: "Oops! The answer is incorrect.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Close", style: .cancel))
+            present(ac, animated: true)
+            }
+        
     }
     func levelUp(action : UIAlertAction){
         level += 1
+        score = 0
         solutions.removeAll(keepingCapacity: true)
         loadLevel()
         
@@ -174,6 +191,7 @@ class ViewController: UIViewController {
         currentAnswer.text = ""
         for button in activatedButtons{
             button.isHidden = false
+            hiddenButton -= 1
         }
         activatedButtons.removeAll()
     }
